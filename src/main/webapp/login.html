@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Sign In</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+        <script src="js/login_Js.js" defer></script>
+        <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          </head>
+    <body>
+            <form id="loginForm" name="loginForm" onsubmit='loginPOST();return false;'>
+                     <div id="start">
+            <input type="text" name="username" id="username" placeholder="Enter your username"><!-- comment -->
+            <input type="password" name="password" id="password" placeholder="Enter your passowrd"><!-- comment -->
+         <input type="submit" id="submit" class="btn btn-primary" value="Signin">
+       <input type="button"  class="btn btn-secondary" onclick="location.href='index.html'" value="Signup" />     
+       <input type="button" onclick="location.href='guest.html'" class="btn btn-warning" value="Continue as Guest"/>
+        
+        </div>
+          </form>
+ <div id="error"></div>
+    </body>
+</html>
+

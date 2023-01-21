@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function getbook(){
+                 var xhr = new XMLHttpRequest();
+    alert("TI ua ginei");
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("myTable").style.display = "block";
+
+
+            const jsonResponse = JSON.parse(xhr.responseText);
+             var tableBody = document.getElementById("tableBody");
+
+  // Iterate through the JSON response
+  for (var i = 0; i < jsonResponse.length; i++) {
+    // Create a new row element
+    var row = document.createElement("tr");
+
+    // Create a new cell for the title
+    var titleCell = document.createElement("td");
+    titleCell.innerHTML = jsonResponse[i].title ;
+
+    // Create a new cell for the genre
+    var genreCell = document.createElement("td");
+    genreCell.innerHTML = jsonResponse[i].genre;
+
+    // Create a new cell for the checkbox
+    var checkboxCell = document.createElement("td");
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkboxCell.appendChild(checkbox);
+
+    // Add the cells to the row
+    row.appendChild(titleCell);
+    row.appendChild(genreCell);
+    row.appendChild(checkboxCell);
+
+    // Add the row to the table body
+    tableBody.appendChild(row);
+  }
+
+
+        } else if (xhr.status !== 200) {
+        }
+    };
+    xhr.open('POST', 'GetBooks');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send();
+
+
+            }
+        </script>
+    </head>
+    <body>
+        
+        <button id="seeBooks" value="See books" onclick="getbook()">See book</button>
+        <table style="display: none" id="myTable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Genre</th>
+      <th>Select</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+  </tbody>
+</table>
+            
+    </body>
+    
+    
+    
+    
+    
+    
+</html>

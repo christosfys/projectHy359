@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="js/adminjavascript.js" defer></script>
+
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    h1 {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome Admin</h1>
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">    
+     
+          <div class="form-group">
+               <input type="button" class="btn btn-primary btn-block" value="Get Users" onclick="getUsers()">
+          <div class="form-group">
+            <input type="submit" class="btn btn-primary btn-block" value="Get Statistics" onclick="getStatistics()">
+          </div>
+                 <div id="ajaxContent"> 
+                
+                 </div>
+              
+               </div>
+           <div id="deleteuser">
+                <form id="deleteform"    name="loginForm" onsubmit='deleteUser();return false;'>
+                     <label for="username">Username:</label>
+      <input type="text" id="username" name="username"><br><br>
+                      <input type="submit" value="Delete User">
+                     
+                 </form>
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>

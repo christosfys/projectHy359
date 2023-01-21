@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Librarian Page</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="js/librarianjs.js" defer></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Librarian Page</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-group-vertical">
+          <button class="btn btn-default">Update Data</button>
+          <button class="btn btn-default">See Requests</button>
+          <button class="btn btn-default">Post a Book</button>
+          <button class="btn btn-default">See Active Borrowings</button>
+          <button class="btn btn-default" onclick="showform()">Change Availability of a Book </button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div id="info">
+        <form id="avaliabilty" name="avaliabilty" onsubmit='changeavalbilty()';return false;'>
+            <input type='text' id='isbn'name='isbn'>
+            <input type="submit" id="submit" class="btn btn-primary" value="Change">
+            
+        </form>
+             
+
+        
+    </div>
+    
+</body>
+</html>
