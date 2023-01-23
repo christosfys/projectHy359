@@ -162,18 +162,47 @@ function getBooks() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
 
-            const responseData = JSON.parse(xhr.responseText);
-            var count = Object.keys(responseData).length;
-            console.log(xhr.responseText);
-            alert(count);
-            document.getElementById("ajaxContent").innerHTML = "";
-            
-            for (var i = 0; i < count; i++) {
-                document.getElementById("ajaxContent").innerHTML += " " + responseData[i].title + "|| " + responseData[i].isbn + " ||" + responseData[i].authors + "||" + responseData[i].title + "<img src='" + responseData[i].photo + "'/>";
-                document.getElementById("ajaxContent").innerHTML += "<br>";
+            const jsonArray = JSON.parse(xhr.responseText);
+           var table = document.createElement("table");
+table.setAttribute("id", "json-table");
+var thead = document.createElement("thead");
+var tr = document.createElement("tr");
+
+for(var key in jsonArray[0]) {
+    var th = document.createElement("th");
+    th.innerHTML = key;
+    tr.appendChild(th);
+}
+
+thead.appendChild(tr);
+table.appendChild(thead);
+
+// Create table body
+var tbody = document.createElement("tbody");
+
+for(var i = 0; i < jsonArray.length; i++) {
+    var tr = document.createElement("tr");
+
+    for(var key in jsonArray[i]) {
+        var td = document.createElement("td");
+        td.innerHTML = jsonArray[i][key];
+        tr.appendChild(td);
+    }
+
+    tbody.appendChild(tr);
+}
+
+table.appendChild(tbody);
+
+// Append table to the body
+document.body.appendChild(table);
 
 
-            }
+//var jsonArray = [{"isbn":"9781606801482","title":"She: A History of Adventure","authors":"H. Rider Haggard","genre":"Adventure","url":"https://www.abebooks.com/products/isbn/9781606801482?cm_sp=bdp-_-ISBN13-_-PLP","photo":"https://pictures.abebooks.com/isbn/9781606801482-us.jpg","pages":334,"publicationyear":1887},{"isbn":"9780064471046","title":"The Lion, the Witch and the Wardrobe","authors":"C. S. Lewis","genre":"Fantasy","url":"https://www.abebooks.com/9780064471046/Lion-Witch-Wardrobe-Lewis-0064471047
+
+
+
+
 
         } else if (xhr.status !== 200) {
         }
@@ -192,16 +221,7 @@ function writereview() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
 
-            const responseData = JSON.parse(xhr.responseText);
-            var count = Object.keys(responseData).length;
-            alert(count);
-            document.getElementById("ajaxContent").innerHTML = "";
-            for (var i = 0; i < count; i++) {
-                document.getElementById("ajaxContent").innerHTML += " " + responseData[i].title + "|| " + responseData[i].isbn + " ||" + responseData[i].authors + "||" + responseData[i].title + "<img src='" + responseData[i].photo + "'/>";
-                document.getElementById("ajaxContent").innerHTML += "<br>";
-
-
-            }
+        
 
         } else if (xhr.status !== 200) {
         }
@@ -241,8 +261,8 @@ function requestbook() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // alert("LOgin succesfull");
-            //   const responseData = JSON.parse(xhr.responseText);
+                    //alert("LOgin succesfull");
+            //const responseData = JSON.parse(xhr.responseText);
             document.getElementById("error").innerHTML = "Succeeded Log in";
             window.location.replace('welcome.html');
 
@@ -267,9 +287,25 @@ function seeActiveBorrowings(){
 
             const responseData = JSON.parse(xhr.responseText);
             var count = Object.keys(responseData).length;
+            alert(count);
+           
              document.getElementById("ajaxContent").innerHTML = "";
-             
-               document.getElementById("ajaxContent").innerHTML = "<input type='radio' id='text' name='s' value="+responseData[0].borrowing_id+">";
+             for (var i = 0; i < count; i++) {
+                
+               var radioButton = document.createElement("input");
+                radioButton.type = "radio";
+                radioButton.id="choice";
+                radioButton.name="choice";
+                radioButton.value=responseData[i].title;
+                document.body.appendChild(radioButton);
+               }
+               var button=document.createElement("button");
+               button.innerHTML = "Click me";
+               button.innerHTML = "Click me";
+               button.onclick=function() {
+                getvalue();
+        };
+                document.body.appendChild(button);
 
         } else if (xhr.status !== 200) {
 
@@ -281,3 +317,10 @@ function seeActiveBorrowings(){
 
 
 }
+function getvalue(){
+    
+    alert("mpika");
+  var text= document.querySelector('input[name="choice"]:checked').value;
+   
+   alert(text);
+   }

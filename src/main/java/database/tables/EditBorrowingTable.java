@@ -141,28 +141,7 @@ public class EditBorrowingTable {
             Logger.getLogger(EditBorrowingTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<Borrowing> databaseBorrowing(int user) throws SQLException, ClassNotFoundException {
-        Connection con = DB_Connection.getConnection();
-        Statement stmt = con.createStatement();
-        ArrayList<Borrowing> bor = new ArrayList<Borrowing>();
-        ResultSet rs;
-        try {
-            rs = stmt.executeQuery("SELECT *  FROM borrowing WHERE user_id= '" + user + "' AND (status='borrowing' OR status='successEnd')");
-           System.out.println("ekteloymi");
-            while (rs.next()) {
-                String json = DB_Connection.getResultsToJSON(rs);
-                Gson gson = new Gson();
-                Borrowing borr = gson.fromJson(json, Borrowing.class);
-                bor.add(borr);
-            }
-            System.out.println(bor);
-            return bor;
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-        }
-        return null;
-    }
+
 
      
 }

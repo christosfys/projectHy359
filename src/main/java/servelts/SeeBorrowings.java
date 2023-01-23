@@ -28,7 +28,7 @@ import database.tables.EditBorrowingTable;
 import java.util.ArrayList;
 import mainClasses.Book;
 import mainClasses.Borrowing;
-
+import database.tables.GeneralQueries;
 /**
 /**
  *
@@ -68,7 +68,7 @@ public class SeeBorrowings extends HttpServlet {
          try {
                   String username = (String) session.getAttribute("loggedIn");
                   EditStudentsTable st = new EditStudentsTable();
-                  EditBorrowingTable ebt=new EditBorrowingTable();
+                  GeneralQueries  ebt=new GeneralQueries();
                   
                
                   String json=st.getid(username);
@@ -76,7 +76,7 @@ public class SeeBorrowings extends HttpServlet {
                     Gson g = new Gson();
                 Student s = g.fromJson(json, Student.class); 
                     System.out.println(s.getUser_id());
-            ArrayList <Borrowing> bor = ebt.databaseBorrowing(s.getUser_id());
+            JsonArray bor = ebt.databaseBorrowing(s.getUser_id());
                   
             Gson gson = new Gson();
             JsonArray jsonlibs = gson.toJsonTree(bor).getAsJsonArray();
