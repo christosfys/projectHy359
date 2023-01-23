@@ -183,6 +183,34 @@ public class GeneralQueries {
         }
         return null;
        
+    
+        }
+ public JsonArray allLibrs(int user_id) throws SQLException, ClassNotFoundException {
+        String query = ("SELECT books.isbn, books.title ,borrowing.status, students.firstname ,students.lastname, students.telephone ,students.university "
+                + "FROM librarians,books,borrowing,students,booksinlibraries"
+                + " WHERE booksinlibraries.isbn=books.isbn"
+                + " AND booksinlibraries.bookcopy_id=borrowing.bookcopy_id "
+                + "AND borrowing.user_id=students.user_id "
+                + "AND librarians.library_id='" + user_id + "'"
+                + "AND (borrowing.status='borrowing' OR borrowing.status='successEnd')");
+        Connection con = DB_Connection.getConnection();
+//        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+         JsonArray ja=new JsonArray();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                JsonObject json = DB_Connection.getResultsToJSONObject(rs);
+                Gson gson = new Gson();
+                ja.add(json);
+            }
+            return ja;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
     }
 
 }

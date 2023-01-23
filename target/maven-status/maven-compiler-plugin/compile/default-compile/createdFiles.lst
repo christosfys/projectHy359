@@ -1,5 +1,14 @@
+database/tables/EditStudentsTable.class
 database/tables/GeneralQueries.class
+servelts/MyServlet.class
 database/tables/EditBorrowingTable.class
+servelts/ChangeAvaliability.class
 NewServlet.class
+servelts/GetUsers.class
+servelts/SeeActiveBorrowing.class
+servelts/UpdateData.class
+servelts/GetData.class
 servelts/Request_Data.class
+servelts/DeleteUser.class
+servelts/Login.class
 servelts/SeeBorrowings.class

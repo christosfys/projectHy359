@@ -51,6 +51,10 @@
         <servlet-name>SeeBorrowings</servlet-name>
         <servlet-class>servelts.SeeBorrowings</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SeeActiveBorrowing</servlet-name>
+        <servlet-class>servelts.SeeActiveBorrowing</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -98,6 +102,10 @@
     <servlet-mapping>
         <servlet-name>SeeBorrowings</servlet-name>
         <url-pattern>/SeeBorrowings</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SeeActiveBorrowing</servlet-name>
+        <url-pattern>/SeeActiveBorrowing</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
