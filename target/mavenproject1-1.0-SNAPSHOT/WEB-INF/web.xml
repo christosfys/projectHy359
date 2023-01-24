@@ -55,6 +55,10 @@
         <servlet-name>SeeActiveBorrowing</servlet-name>
         <servlet-class>servelts.SeeActiveBorrowing</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateBook</servlet-name>
+        <servlet-class>servelts.CreateBook</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -106,6 +110,10 @@
     <servlet-mapping>
         <servlet-name>SeeActiveBorrowing</servlet-name>
         <url-pattern>/SeeActiveBorrowing</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateBook</servlet-name>
+        <url-pattern>/CreateBook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

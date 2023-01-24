@@ -324,3 +324,6 @@ function getvalue(){
    
    alert(text);
    }
+   
+   
+   
