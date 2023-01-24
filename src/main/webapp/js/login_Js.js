@@ -163,39 +163,39 @@ function getBooks() {
 
 
             const jsonArray = JSON.parse(xhr.responseText);
-           var table = document.createElement("table");
-table.setAttribute("id", "json-table");
-var thead = document.createElement("thead");
-var tr = document.createElement("tr");
+            var table = document.createElement("table");
+            table.setAttribute("id", "json-table");
+            var thead = document.createElement("thead");
+            var tr = document.createElement("tr");
 
-for(var key in jsonArray[0]) {
-    var th = document.createElement("th");
-    th.innerHTML = key;
-    tr.appendChild(th);
-}
+            for (var key in jsonArray[0]) {
+                var th = document.createElement("th");
+                th.innerHTML = key;
+                tr.appendChild(th);
+            }
 
-thead.appendChild(tr);
-table.appendChild(thead);
+            thead.appendChild(tr);
+            table.appendChild(thead);
 
 // Create table body
-var tbody = document.createElement("tbody");
+            var tbody = document.createElement("tbody");
 
-for(var i = 0; i < jsonArray.length; i++) {
-    var tr = document.createElement("tr");
+            for (var i = 0; i < jsonArray.length; i++) {
+                var tr = document.createElement("tr");
 
-    for(var key in jsonArray[i]) {
-        var td = document.createElement("td");
-        td.innerHTML = jsonArray[i][key];
-        tr.appendChild(td);
-    }
+                for (var key in jsonArray[i]) {
+                    var td = document.createElement("td");
+                    td.innerHTML = jsonArray[i][key];
+                    tr.appendChild(td);
+                }
 
-    tbody.appendChild(tr);
-}
+                tbody.appendChild(tr);
+            }
 
-table.appendChild(tbody);
+            table.appendChild(tbody);
 
 // Append table to the body
-document.body.appendChild(table);
+            document.body.appendChild(table);
 
 
 //var jsonArray = [{"isbn":"9781606801482","title":"She: A History of Adventure","authors":"H. Rider Haggard","genre":"Adventure","url":"https://www.abebooks.com/products/isbn/9781606801482?cm_sp=bdp-_-ISBN13-_-PLP","photo":"https://pictures.abebooks.com/isbn/9781606801482-us.jpg","pages":334,"publicationyear":1887},{"isbn":"9780064471046","title":"The Lion, the Witch and the Wardrobe","authors":"C. S. Lewis","genre":"Fantasy","url":"https://www.abebooks.com/9780064471046/Lion-Witch-Wardrobe-Lewis-0064471047
@@ -221,7 +221,7 @@ function writereview() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
 
-        
+
 
         } else if (xhr.status !== 200) {
         }
@@ -261,7 +261,7 @@ function requestbook() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-                    //alert("LOgin succesfull");
+            //alert("LOgin succesfull");
             //const responseData = JSON.parse(xhr.responseText);
             document.getElementById("error").innerHTML = "Succeeded Log in";
             window.location.replace('welcome.html');
@@ -277,35 +277,74 @@ function requestbook() {
     xhr.send(jsonData);
 }
 
-function seeActiveBorrowings(){
+function seeActiveBorrowings() {
     var xhr = new XMLHttpRequest();
     //alert("TI ua ginei");
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
-        alert(xhr.responseText);
+            alert(xhr.responseText);
 
-            const responseData = JSON.parse(xhr.responseText);
-            var count = Object.keys(responseData).length;
-            alert(count);
-           
-             document.getElementById("ajaxContent").innerHTML = "";
-             for (var i = 0; i < count; i++) {
+            const jsonArray = JSON.parse(xhr.responseText);
+            var table = document.createElement("table");
+            table.setAttribute("id", "json-table");
+            var thead = document.createElement("thead");
+            var tr = document.createElement("tr");
+
+            for (var key in jsonArray[0]) {
+                var th = document.createElement("th");
+                th.innerHTML = key;
+                tr.appendChild(th);
+            }
+
+            thead.appendChild(tr);
+            table.appendChild(thead);
+
+// Create table body
+            var tbody = document.createElement("tbody");
+
+            for (var i = 0; i < jsonArray.length; i++) {
+                var tr = document.createElement("tr");
+
+                for (var key in jsonArray[i]) {
+                    var td = document.createElement("td");
+                    td.innerHTML = jsonArray[i][key];
+                    
+                    tr.appendChild(td);
+                }
                 
-               var radioButton = document.createElement("input");
+                var radioButton = document.createElement("input");
                 radioButton.type = "radio";
-                radioButton.id="choice";
-                radioButton.name="choice";
-                radioButton.value=responseData[i].title;
-                document.body.appendChild(radioButton);
-               }
-               var button=document.createElement("button");
-               button.innerHTML = "Click me";
-               button.innerHTML = "Click me";
-               button.onclick=function() {
+                radioButton.id = "choice";
+                radioButton.name = "choice";
+                radioButton.value = jsonArray[i].title;
+                tr.appendChild(radioButton);
+                
+               
+               
+               
+
+                tbody.appendChild(tr);
+                
+            }
+
+            table.appendChild(tbody);
+
+// Append table to the body
+            document.body.appendChild(table);
+
+
+
+        
+
+
+            var button = document.createElement("button");
+            button.innerHTML = "Click me";
+            button.innerHTML = "Click me";
+            button.onclick = function () {
                 getvalue();
-        };
-                document.body.appendChild(button);
+            };
+            document.body.appendChild(button);
 
         } else if (xhr.status !== 200) {
 
@@ -317,13 +356,13 @@ function seeActiveBorrowings(){
 
 
 }
-function getvalue(){
-    
+function getvalue() {
+
     alert("mpika");
-  var text= document.querySelector('input[name="choice"]:checked').value;
-   
-   alert(text);
-   }
-   
-   
-   
+    var text = document.querySelector('input[name="choice"]:checked').value;
+
+    alert(text);
+}
+
+
+
