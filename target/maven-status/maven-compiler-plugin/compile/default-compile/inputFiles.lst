@@ -16,11 +16,11 @@
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/JSON_Converter.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/SeeBorrowings.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/SeeActiveBorrowing.java
-/Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/GetBook.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/ChangeAvaliability.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Student.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/database/tables/EditAdminMessageTable.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Librarian.java
+/Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/PareTarequest.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/database/tables/EditReviewsTable.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/GetData.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/UpdateData.java
@@ -31,4 +31,5 @@
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Review.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Borrowing.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/NewServlet.java
+/Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/FindBooks.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Book.java

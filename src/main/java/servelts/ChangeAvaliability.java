@@ -81,11 +81,11 @@ public class ChangeAvaliability extends HttpServlet {
               Gson g = new Gson();
              Librarian l=g.fromJson(library_id, Librarian.class);
              JsonElement jsonElement = g.toJsonTree(l);
-              jsonElement.getAsJsonObject().addProperty("user_id",l.getLibrary_id());
+              jsonElement.getAsJsonObject().addProperty("library_id",l.getLibrary_id());
               jsonElement.getAsJsonObject().addProperty("isbn",isbn);
              jsonElement.getAsJsonObject().addProperty("available","true");
               String finalresult=  g.toJson(jsonElement);
-                  System.out.println(finalresult);
+              System.out.println(finalresult);
                 EditBooksInLibraryTable eblt=new EditBooksInLibraryTable();
              eblt.addBookInLibraryFromJSON(finalresult);
         

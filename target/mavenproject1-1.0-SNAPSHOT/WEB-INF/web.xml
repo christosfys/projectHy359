@@ -59,6 +59,14 @@
         <servlet-name>CreateBook</servlet-name>
         <servlet-class>servelts.CreateBook</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FindBooks</servlet-name>
+        <servlet-class>servelts.FindBooks</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PareTarequest</servlet-name>
+        <servlet-class>servelts.PareTarequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -114,6 +122,14 @@
     <servlet-mapping>
         <servlet-name>CreateBook</servlet-name>
         <url-pattern>/CreateBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindBooks</servlet-name>
+        <url-pattern>/FindBooks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PareTarequest</servlet-name>
+        <url-pattern>/PareTarequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -81,6 +81,10 @@ public class GetBooks extends HttpServlet {
             response.getWriter().write(jsonlibs.toString());
             response.setStatus(200);
         } catch (Exception e) {
+            response.setStatus(403);
+            JsonObject jo = new JsonObject();
+            jo.addProperty("error", "Database error!");
+            response.getWriter().write(jo.toString());
 
         }
 

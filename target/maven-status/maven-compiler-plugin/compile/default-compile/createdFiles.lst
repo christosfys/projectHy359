@@ -9,6 +9,8 @@ mainClasses/Book.class
 database/tables/EditBorrowingTable.class
 servelts/Login_Admin.class
 servelts/CreateBook.class
+servelts/FindBooks.class
+servelts/PareTarequest.class
 database/tables/EditAdminMessageTable.class
 servelts/ChangeAvaliability.class
 mainClasses/BookInLibrary.class
@@ -27,7 +29,6 @@ servelts/Request_Data.class
 servelts/DeleteUser.class
 servelts/Login.class
 servelts/GetBooks.class
-servelts/GetBook.class
 servelts/SeeBorrowings.class
 mainClasses/Borrowing.class
 mainClasses/User.class

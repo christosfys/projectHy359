@@ -353,7 +353,8 @@ function getvalue() {
 }
 
 function openSearch(){
-    let element = document.getElementById("book");
+    alert("patietai to gamidi");
+    let element = document.getElementById("findbooks");
     let hidden = element.getAttribute("hidden");
 
     if (hidden) {
@@ -364,6 +365,32 @@ function openSearch(){
 
     
 
+}
+function findbooks(){
+     let myForm = document.getElementById('getbook');
+    let formData = new FormData(myForm);
+
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+     formData.forEach((value, key) => (!data[key] && data[key] !== undefined) && delete data[key]);
+    var jsonData = JSON.stringify(data);
+   
+    alert(jsonData);
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // alert("LOgin succesfull");
+           
+
+        } else if (xhr.status !== 200) {
+
+            document.getElementById("error").innerHTML = "Wrong Credetential";
+        }
+    };
+
+    xhr.open('Post', 'FindBooks');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonData);
 }
 
 

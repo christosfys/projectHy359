@@ -109,4 +109,30 @@ function createbook(){
     
 }
   
+  
+  function pareTarequests(){
+          alert("patietai to gamidi");
+    
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+        alert(xhr.responseText);
+        
+          
+
+        } else if (xhr.status !== 200) {
+
+     
+        }
+    };
+
+    xhr.open('GET', 'PareTarequest');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send();
+      
+      
+  
+  
+  
+  }
 

@@ -83,7 +83,7 @@ public class DeleteUser extends HttpServlet {
         System.out.println(user_lib );
             String st_user = eut.databaseStudentUserToJSON(username);
             if (st_user == null && user_lib == null) {
-             response.setStatus(409);
+                response.setStatus(409);
                 Gson gson = new Gson();
                 JsonObject jo = new JsonObject();
                 jo.addProperty("error", "The user hasn't exist");

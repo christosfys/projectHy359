@@ -17,6 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Book;
 import mainClasses.BookInLibrary;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
+
 
 /**
  *
@@ -42,23 +46,33 @@ public class EditBooksInLibraryTable {
         return tr;
     }
     
-    public BookInLibrary databaseToBookInLibrary(int id) throws SQLException, ClassNotFoundException{
-         Connection con = DB_Connection.getConnection();
+    public JsonArray databaseToBookInLibrary(String id) throws SQLException, ClassNotFoundException{
+          String query = ("SELECT bookcopy_id FROM booksinlibraries WHERE library_id='"+id+"'");
+      Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
+        
+        
+        
+        
+        JsonArray ja=new JsonArray();
         ResultSet rs;
         try {
-            rs = stmt.executeQuery("SELECT * FROM booksinlibraries WHERE library_id= '" + id + "'");
-            rs.next();
-            String json=DB_Connection.getResultsToJSON(rs);
-            Gson gson = new Gson();
-            BookInLibrary tr  = gson.fromJson(json, BookInLibrary.class);
-            return tr;
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                
+                JsonObject json = DB_Connection.getResultsToJSONObject(rs);
+                System.out.println(json.toString());
+                Gson gson = new Gson();
+                ja.add(json);
+            }
+            return ja;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
         return null;
     }
+    
 
     public void createBooksInLibrary() throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
@@ -121,7 +135,7 @@ public class EditBooksInLibraryTable {
 
         ResultSet rs;
          try {
-            rs = stmt.executeQuery("SELECT bookcopy_id FROM booksinlibraries WHERE isbn = '" + isbn + "'");
+            rs = stmt.executeQuery("SELECT bookcopy_id FROM booksinlibraries WHERE isbn = '" + isbn + "' AND avaliable=true");
             rs.next();
             String json=DB_Connection.getResultsToJSON(rs);
             return json;

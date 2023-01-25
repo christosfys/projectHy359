@@ -25,34 +25,53 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <input type="submit" id="logout" name="logaout" value="logout" onclick="logout()">
         <input type="submit" id="requestdata" value="Request data " onclick="requestData()">
         <input type="submit" id="updatedata" value="Update data " onclick="showUpdate()">
-                <button onclick="getBooks()">See book</button>
-                
-                
-                <button onclick="seeActiveBorrowings()">See Active Borrowing</button>
-                
-                <button onclick="showrequest()">Request</button>
-                <div id="request" hidden="hidden">
-                    <form id="book" name="book" onsubmit="requestbook();return false">
-                         <label for="password">Isbn:</label><br>
+        <button onclick="getBooks()">See book</button>
+
+
+        <button onclick="seeActiveBorrowings()">See Active Borrowing</button>
+        <button onclick="openSearch()">Find Books</button>
+
+
+        <button onclick="showrequest()">Request</button>
+        <div id="request" hidden="hidden">
+            <form id="book" name="book" onsubmit="requestbook();return false">
+                <label for="isbn">Isbn:</label><br>
                 <input type="text"  name="isbn" id="isbn"><br>
-                  <input type="submit" id="submit" class="button" value="Request">
-                    </form>
-               
-                        
-                        
-                </div>
+                <input type="submit" id="submit" class="button" value="Request">
+            </form>
+
+
+
+        </div>
+
+        <div id="findbooks" hidden="hidden">
+            <form id="getbook" name="getbook" onsubmit="findbooks();return false">
+                <label for="title">Title:</label>
+                <input type="text"  name="title" id="tile"><br>
+                <label for="Author">Author:</label>
+                <input type="text"  name="authors" id="author"><br><!-- comment -->
+                <label for="FromPage">FromPage</label>
+                <input type="text"  name="frompage" id="frompage"><br>
+                <label for="topage">ToPage:</label>
+                <input type="text"  name="topage" id="topage"><br>
+                 <input type="submit" id="submit" class="button" value="FindBooks">
+
+
+
+            </form>
+        </div>
 
         <div id="update" hidden="hidden">
             <form id="myForm" name="myForm" onsubmit='updateData();return false'>
 
 
-                 <label for="password">password:</label><br>
+                <label for="password">password:</label><br>
                 <input type="password"  name="password" id="password"><br>
-               
-               
 
-             
-              
+
+
+
+
                 <br>
                 <br>
 
@@ -60,24 +79,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <input type="radio" value="Female" name="gender"/>Woman
                 <input type="radio" value="Other" id="Other" name="gender"
                        />Other <br>
-                
 
 
 
 
-            
+
+
 
 
                 <br>
-            
+
                 <div id="libraryname" style="display:none;"">
                     <label for="name_libe">Enter name of library</label>
                     <input name="libraryname">
-                    
+
                 </div>
 
                 <br>
-              
+
                 <br>
 
 
@@ -355,14 +374,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <input type="url" name="personalpage" id="url"
                        placeholder="https://example.com"
                        pattern="https://.*" size="30"
-                      >
+                       >
                 <input type="text" name="lat">
                 <input type="text" name="lon"><br>
                 <input type="submit" id="submit" class="button" value="Registers">
-               </form>
+            </form>
         </div><!-- comment -->
-                    
-   
+
+
 
 
     </body>

@@ -45,8 +45,9 @@ public class GeneralQueries {
             System.err.println(e.getMessage());
         }
         return null;
-    }String isbn,title,authors,genre,url,photo;
-    int pages,publicationyear;
+    }
+    String isbn, title, authors, genre, url, photo;
+    int pages, publicationyear;
 
     public JsonArray allBooksOfALibrary(int library_id) throws SQLException, ClassNotFoundException {
         String query = "  SELECT librarians.libraryname,books.isbn, books.title, books.authors,  books.genre, books.pages, books.url, books.photo,  books.publicationyear, booksinlibraries.available \n"
@@ -55,11 +56,11 @@ public class GeneralQueries {
                 + "       booksinlibraries.isbn=books.isbn \n"
                 + "      AND librarians.library_id='" + library_id + "'\n"
                 + "      AND booksinlibraries.library_id='" + library_id + "'\n";
-      
+
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         JsonArray ja = new JsonArray();
-        
+
         ResultSet rs;
         try {
             rs = stmt.executeQuery(query);
@@ -85,7 +86,7 @@ public class GeneralQueries {
                 + "      booksinlibraries.bookcopy_id=borrowing.bookcopy_id\n"
                 + "      AND booksinlibraries.library_id='" + library_id + "'\n"
                 + "        AND borrowing.user_id=students.user_id";
-          
+
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         JsonArray ja = new JsonArray();
@@ -115,10 +116,10 @@ public class GeneralQueries {
                 + "and borrowing.user_id='" + user_id + "'\n"
                 + "and students.user_id='" + user_id + "'\n"
                 + "and borrowing.status!='successEnd'";
-        
+
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        JsonArray ja=new JsonArray();
+        JsonArray ja = new JsonArray();
         ResultSet rs;
         try {
             rs = stmt.executeQuery(query);
@@ -147,7 +148,7 @@ public class GeneralQueries {
                 + "and borrowing.status='successEnd'";
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-         JsonArray ja=new JsonArray();
+        JsonArray ja = new JsonArray();
         ResultSet rs;
         try {
             rs = stmt.executeQuery(query);
@@ -163,11 +164,12 @@ public class GeneralQueries {
         }
         return null;
     }
-        public JsonArray databaseBorrowing(int user) throws SQLException, ClassNotFoundException {
-                    String query = ("SELECT books.isbn,books.title, borrowing.fromdate, borrowing.todate, borrowing.status  FROM borrowing,books,booksinlibraries WHERE borrowing.user_id= '" + user + "' AND borrowing.bookcopy_id=booksinlibraries.bookcopy_id AND booksinlibraries.isbn=books.isbn  AND (borrowing.status='borrowing' OR borrowing.status='successEnd' or borrowing.status='requested') ");
+
+    public JsonArray databaseBorrowing(int user) throws SQLException, ClassNotFoundException {
+        String query = ("SELECT books.isbn,books.title, borrowing.fromdate, borrowing.todate, borrowing.status  FROM borrowing,books,booksinlibraries WHERE borrowing.user_id= '" + user + "' AND borrowing.bookcopy_id=booksinlibraries.bookcopy_id AND booksinlibraries.isbn=books.isbn  AND (borrowing.status='borrowing' OR borrowing.status='successEnd' or borrowing.status='requested') ");
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-         JsonArray ja=new JsonArray();
+        JsonArray ja = new JsonArray();
         ResultSet rs;
         try {
             rs = stmt.executeQuery(query);
@@ -182,10 +184,10 @@ public class GeneralQueries {
             System.err.println(e.getMessage());
         }
         return null;
-       
-    
-        }
- public JsonArray allLibrs(int user_id) throws SQLException, ClassNotFoundException {
+
+    }
+
+    public JsonArray allLibrs(int user_id) throws SQLException, ClassNotFoundException {
         String query = ("SELECT books.isbn, books.title ,borrowing.status, students.firstname ,students.lastname, students.telephone ,students.university "
                 + "FROM librarians,books,borrowing,students,booksinlibraries"
                 + " WHERE booksinlibraries.isbn=books.isbn"
@@ -196,7 +198,7 @@ public class GeneralQueries {
         Connection con = DB_Connection.getConnection();
 //        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-         JsonArray ja=new JsonArray();
+        JsonArray ja = new JsonArray();
         ResultSet rs;
         try {
             rs = stmt.executeQuery(query);
@@ -213,7 +215,40 @@ public class GeneralQueries {
         return null;
     }
 
+    public String getRequests(String copy_id) throws SQLException, ClassNotFoundException {
+       /* String query = ("SELECT books.title,students.firstname, students.lastname,students.telephone "
+                + "FROM books,borrowing,booksinlibraries,students"
+                + "WHERE booksinlibraries.bookcopy_id=borrowing.bookcopy_id "
+                + "AND booksinlibraries.isbn=books.isbn "
+                + "AND students.user_id=borrowing.user_id "
+                + "AND borrowing.bookcopy_id='" + copy_id + "'"
+                + "AND borrowing.status='requested'");*/
+       String query = ("SELECT borrowing.borrowing_id,students.firstname, students.lastname, books.title\n" +
+"FROM students\n" +
+"JOIN borrowing ON students.user_id = borrowing.user_id\n" +
+"JOIN booksinlibraries ON borrowing.bookcopy_id = booksinlibraries.bookcopy_id\n" +
+"JOIN books ON booksinlibraries.isbn = books.isbn\n" +
+"WHERE borrowing.bookcopy_id = '"+copy_id+"' AND borrowing.status='requested'");
+       
+        Connection con = DB_Connection.getConnection();
+//        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+       // JsonArray ja = new JsonArray();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery(query);
+            rs.next();
+        //    System.out.println()
+            String json = DB_Connection.getResultsToJSON(rs);
+                        System.out.println(json);
+
+            return json;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+
+    }
+
 }
-
-
-           
