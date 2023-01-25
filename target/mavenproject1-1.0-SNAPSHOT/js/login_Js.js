@@ -300,7 +300,6 @@ function seeActiveBorrowings() {
             thead.appendChild(tr);
             table.appendChild(thead);
 
-// Create table body
             var tbody = document.createElement("tbody");
 
             for (var i = 0; i < jsonArray.length; i++) {
@@ -309,44 +308,33 @@ function seeActiveBorrowings() {
                 for (var key in jsonArray[i]) {
                     var td = document.createElement("td");
                     td.innerHTML = jsonArray[i][key];
-                    
+
                     tr.appendChild(td);
                 }
-                
+
                 var radioButton = document.createElement("input");
                 radioButton.type = "radio";
                 radioButton.id = "choice";
                 radioButton.name = "choice";
                 radioButton.value = jsonArray[i].title;
                 tr.appendChild(radioButton);
-                
-               
-               
-               
-
                 tbody.appendChild(tr);
-                
+
             }
 
             table.appendChild(tbody);
-
-// Append table to the body
             document.body.appendChild(table);
-
-
-
-        
-
-
             var button = document.createElement("button");
-            button.innerHTML = "Click me";
-            button.innerHTML = "Click me";
+            button.innerHTML = "Write review";
+
             button.onclick = function () {
                 getvalue();
             };
             document.body.appendChild(button);
+            
+            
 
-        } else if (xhr.status !== 200) {
+      } else if (xhr.status !== 200) {
 
         }
     };
@@ -362,6 +350,20 @@ function getvalue() {
     var text = document.querySelector('input[name="choice"]:checked').value;
 
     alert(text);
+}
+
+function openSearch(){
+    let element = document.getElementById("book");
+    let hidden = element.getAttribute("hidden");
+
+    if (hidden) {
+        element.removeAttribute("hidden");
+    } else {
+        element.setAttribute("hidden", "hidden");
+    }
+
+    
+
 }
 
 
