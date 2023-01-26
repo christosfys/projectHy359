@@ -7,32 +7,26 @@ package servelts;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import database.tables.EditStudentsTable;
-import database.tables.EditBorrowingTable;
-import database.tables.EditBooksInLibraryTable;
-import database.tables.GeneralQueries;
 
-import database.tables.EditLibrarianTable;
 import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
-import mainClasses.Student;
-import mainClasses.BookInLibrary;
+import mainClasses.*;
+import database.tables.*;
 
-import mainClasses.Librarian;
 import com.google.gson.*;
-//import org.json.simple.JSONObject;    
-
-
 
 /**
  *
  * @author christosfysarakis
  */
-public class PareTarequest extends HttpServlet {
+public class Accept_borrowing extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,7 +40,18 @@ public class PareTarequest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Accept_borrowing</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Accept_borrowing at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,50 +66,6 @@ public class PareTarequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("loggedIn");
-        System.out.println("EImai ego" + username);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        try {
-            EditLibrarianTable elt=new EditLibrarianTable();
-                        EditBooksInLibraryTable ebt=new EditBooksInLibraryTable();
-
-            String id_library=  elt.getid(username);
-          JsonObject ja = new JsonParser().parse(id_library).getAsJsonObject();
-          String id=ja.get("library_id").getAsString();
-          System.out.println("EInai to kleidi "+ id);
-          JsonArray arr=ebt.databaseToBookInLibrary(id);
-          JsonArray finalArray=new JsonArray();
-          GeneralQueries q=new GeneralQueries();
-      
-         for (JsonElement element : arr) {
-         String name = element.getAsJsonObject().get("bookcopy_id").getAsString();
-    
-            System.out.println("BRika to Name: " + name );
-            
-            
-            String json=q.getRequests(name);
-            System.out.println(json);
-            if(json!=null){
-                JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                System.out.println(jsonObject.toString());
-                finalArray.add(jsonObject);
-            }
-         }
-         response.getWriter().write(finalArray.toString());
-            response.setStatus(200);
-   
-         
-            
-            
-            
-          
-          
-        } catch (Exception e) {
-        }
-
         processRequest(request, response);
     }
 
@@ -119,6 +80,38 @@ public class PareTarequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+         HttpSession session = request.getSession();
+       
+//        System.out.println(username);
+          JsonObject ja = new Gson().fromJson(request.getReader().readLine(), JsonObject.class);
+          try{
+              EditBorrowingTable ebt=new EditBorrowingTable();
+              String borr=ja.get("borrowing_id").getAsString();
+                 int number = Integer.parseInt(borr);
+              ebt.updateBorrowing(number,"borrowing");
+              String coppy_of_book=ebt.getbook(number);
+              System.out.println(coppy_of_book);
+              
+              EditBooksInLibraryTable ebtl=new EditBooksInLibraryTable();
+              ebtl.updateBookInLibrary(coppy_of_book,"false");
+              
+                      
+                      
+                                   
+              
+              
+          }catch (Exception e){
+              
+          }
+          
+        
+        
+        
+        
+        
+        
         processRequest(request, response);
     }
 

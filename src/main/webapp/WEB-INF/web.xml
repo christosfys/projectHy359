@@ -67,6 +67,10 @@
         <servlet-name>PareTarequest</servlet-name>
         <servlet-class>servelts.PareTarequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Accept_borrowing</servlet-name>
+        <servlet-class>servelts.Accept_borrowing</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -130,6 +134,10 @@
     <servlet-mapping>
         <servlet-name>PareTarequest</servlet-name>
         <url-pattern>/PareTarequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Accept_borrowing</servlet-name>
+        <url-pattern>/Accept_borrowing</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

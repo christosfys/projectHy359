@@ -327,14 +327,11 @@ function seeActiveBorrowings() {
             var button = document.createElement("button");
             button.innerHTML = "Write review";
 
-            button.onclick = function () {
-                getvalue();
-            };
-            document.body.appendChild(button);
-            
-            
 
-      } else if (xhr.status !== 200) {
+
+
+
+        } else if (xhr.status !== 200) {
 
         }
     };
@@ -352,7 +349,7 @@ function getvalue() {
     alert(text);
 }
 
-function openSearch(){
+function openSearch() {
     alert("patietai to gamidi");
     let element = document.getElementById("findbooks");
     let hidden = element.getAttribute("hidden");
@@ -363,24 +360,24 @@ function openSearch(){
         element.setAttribute("hidden", "hidden");
     }
 
-    
+
 
 }
-function findbooks(){
-     let myForm = document.getElementById('getbook');
+function findbooks() {
+    let myForm = document.getElementById('getbook');
     let formData = new FormData(myForm);
 
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
-     formData.forEach((value, key) => (!data[key] && data[key] !== undefined) && delete data[key]);
+    formData.forEach((value, key) => (!data[key] && data[key] !== undefined) && delete data[key]);
     var jsonData = JSON.stringify(data);
-   
+
     alert(jsonData);
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // alert("LOgin succesfull");
-           
+
 
         } else if (xhr.status !== 200) {
 

@@ -18,6 +18,7 @@ database/tables/EditLibrarianTable.class
 database/tables/EditBooksTable.class
 NewServlet.class
 mainClasses/Librarian.class
+servelts/Accept_borrowing.class
 mainClasses/Student.class
 servelts/GetUsers.class
 servelts/SeeActiveBorrowing.class

@@ -69,10 +69,10 @@ public class EditBorrowingTable {
     }
 
 
-    public void updateBorrowing(int borrowingID, int userID, String info, String status) throws SQLException, ClassNotFoundException {
+    public void updateBorrowing(int borrowingID,String  status) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String updateQuery = "UPDATE borrowing SET status";//...
+        String updateQuery = "UPDATE borrowing SET status='"+status+"' WHERE borrowing_id='"+borrowingID+"'";
         
         stmt.executeUpdate(updateQuery);
         stmt.close();
@@ -142,6 +142,35 @@ public class EditBorrowingTable {
         }
     }
 
+    
+    public String getbook(int id) throws SQLException,ClassNotFoundException{
+        
+         Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT bookcopy_id FROM borrowing WHERE borrowing_id='"+id+"'");
+            rs.next();
+            String json=DB_Connection.getResultsToJSON(rs);
+            return json;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
 
      
 }
