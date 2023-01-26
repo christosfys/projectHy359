@@ -90,9 +90,20 @@ public class Accept_borrowing extends HttpServlet {
               EditBorrowingTable ebt=new EditBorrowingTable();
               String borr=ja.get("borrowing_id").getAsString();
                  int number = Integer.parseInt(borr);
-              ebt.updateBorrowing(number,"borrowing");
+              
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                ebt.updateBorrowing(number,"borrowing");
               String coppy_of_book=ebt.getbook(number);
               System.out.println(coppy_of_book);
+              JsonObject jo= new JsonParser().parse(coppy_of_book).getAsJsonObject();
+              coppy_of_book=jo.get("bookcopy_id").getAsString();
               
               EditBooksInLibraryTable ebtl=new EditBooksInLibraryTable();
               ebtl.updateBookInLibrary(coppy_of_book,"false");

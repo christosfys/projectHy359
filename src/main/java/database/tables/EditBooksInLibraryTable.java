@@ -94,8 +94,8 @@ public class EditBooksInLibraryTable {
     public void updateBookInLibrary(String bookcopy_id, String available) throws SQLException, ClassNotFoundException{
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        System.out.println("OLa kala");
-        String update="UPDATE booksinlibraries SET available='"+available+"'"+ " WHERE bookcopy_id = '"+bookcopy_id+"'";
+        System.out.println("OLa kala mpika me times " + bookcopy_id);
+        String update="UPDATE booksinlibraries SET available='"+available+"'  WHERE bookcopy_id = '"+ bookcopy_id+"'";
         stmt.executeUpdate(update);
     }
 

@@ -2,6 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
+var lat=0;
+var lon=0;
 
 function loginPOST() {
 
@@ -76,13 +78,16 @@ function requestData() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             //const responseData = JSON.parse(xhr.responseText);  
             const responseData = JSON.parse(xhr.responseText);
-
+             lat=responseData.lat;
+             lon=responseData.lon;
 
             //   let result = responseData.includes(\"firstName\":\"John\");
             if (responseData.position === "student") {
                 delete responseData.position;
 
                 document.getElementById("ajaxContent").innerHTML = createTableFromJSON(responseData);
+                
+                alert("OI syntetagmenes einai "+lat+ " "+lon);
             } else {
                 window.location.replace('librarian.html');
                 delete responseData.position;
@@ -109,10 +114,13 @@ function createTableFromJSON(data) {
     for (const x in data) {
         var category = x;
         var value = data[x];
+        
+      
         if (value.endsWith('jpg') || value.endsWith("png")) {
             value = "<img height=300 src='" + value + "'/>";
         }
         html += "<tr><td>" + category + "</td><td>" + value + "</td></tr>";
+        
     }
     html += "</table>";
     return html;

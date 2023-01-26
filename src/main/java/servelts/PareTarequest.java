@@ -26,8 +26,6 @@ import mainClasses.Librarian;
 import com.google.gson.*;
 //import org.json.simple.JSONObject;    
 
-
-
 /**
  *
  * @author christosfysarakis
@@ -68,40 +66,33 @@ public class PareTarequest extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         try {
-            EditLibrarianTable elt=new EditLibrarianTable();
-                        EditBooksInLibraryTable ebt=new EditBooksInLibraryTable();
+            EditLibrarianTable elt = new EditLibrarianTable();
+            EditBooksInLibraryTable ebt = new EditBooksInLibraryTable();
 
-            String id_library=  elt.getid(username);
-          JsonObject ja = new JsonParser().parse(id_library).getAsJsonObject();
-          String id=ja.get("library_id").getAsString();
-          System.out.println("EInai to kleidi "+ id);
-          JsonArray arr=ebt.databaseToBookInLibrary(id);
-          JsonArray finalArray=new JsonArray();
-          GeneralQueries q=new GeneralQueries();
-      
-         for (JsonElement element : arr) {
-         String name = element.getAsJsonObject().get("bookcopy_id").getAsString();
-    
-            System.out.println("BRika to Name: " + name );
-            
-            
-            String json=q.getRequests(name);
-            System.out.println(json);
-            if(json!=null){
-                JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-                System.out.println(jsonObject.toString());
-                finalArray.add(jsonObject);
+            String id_library = elt.getid(username);
+            JsonObject ja = new JsonParser().parse(id_library).getAsJsonObject();
+            String id = ja.get("library_id").getAsString();
+            System.out.println("EInai to kleidi " + id);
+            JsonArray arr = ebt.databaseToBookInLibrary(id);
+            JsonArray finalArray = new JsonArray();
+            GeneralQueries q = new GeneralQueries();
+
+            for (JsonElement element : arr) {
+                String name = element.getAsJsonObject().get("bookcopy_id").getAsString();
+
+                System.out.println("BRika to Name: " + name);
+
+                String json = q.getRequests(name);
+                System.out.println(json);
+                if (json != null) {
+                    JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+                    System.out.println(jsonObject.toString());
+                    finalArray.add(jsonObject);
+                }
             }
-         }
-         response.getWriter().write(finalArray.toString());
+            response.getWriter().write(finalArray.toString());
             response.setStatus(200);
-   
-         
-            
-            
-            
-          
-          
+
         } catch (Exception e) {
         }
 
