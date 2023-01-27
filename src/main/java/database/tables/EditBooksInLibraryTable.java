@@ -135,7 +135,7 @@ public class EditBooksInLibraryTable {
 
         ResultSet rs;
          try {
-            rs = stmt.executeQuery("SELECT bookcopy_id FROM booksinlibraries WHERE isbn = '" + isbn + "' AND avaliable=true");
+            rs = stmt.executeQuery("SELECT bookcopy_id FROM booksinlibraries WHERE isbn = '" + isbn + "' AND available='true' ");
             rs.next();
             String json=DB_Connection.getResultsToJSON(rs);
             return json;

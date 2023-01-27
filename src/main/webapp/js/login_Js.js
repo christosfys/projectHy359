@@ -130,11 +130,15 @@ function createTableFromJSON(data) {
 function showUpdate() {
     let element = document.getElementById("update");
     let hidden = element.getAttribute("hidden");
-
+    
+   
     if (hidden) {
         element.removeAttribute("hidden");
+        alert("einai hidden");
     } else {
         element.setAttribute("hidden", "hidden");
+                alert("den einai hidden");
+
     }
 }
 

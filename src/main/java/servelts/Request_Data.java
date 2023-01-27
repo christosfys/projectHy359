@@ -14,12 +14,19 @@ import javax.servlet.http.HttpServletResponse;
 import database.tables.EditStudentsTable;
 import database.tables.EditBorrowingTable;
 import database.tables.EditBooksInLibraryTable;
+import java.util.Date;
+import java.time.Month;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 
 import database.tables.EditLibrarianTable;
 import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
-import mainClasses.Student ;
+import mainClasses.Student;
 import mainClasses.BookInLibrary;
 
 import mainClasses.Librarian;
@@ -48,7 +55,7 @@ public class Request_Data extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Request_Data</title>");            
+            out.println("<title>Servlet Request_Data</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Request_Data at " + request.getContextPath() + "</h1>");
@@ -83,53 +90,53 @@ public class Request_Data extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         String username = (String) session.getAttribute("loggedIn");
-        System.out.println("EImai ego"+username);
-         response.setContentType("application/json");
+        //System.out.println("EImai ego"+username);
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         JsonObject ja = new Gson().fromJson(request.getReader().readLine(), JsonObject.class);
-    //    HttpSession session = request.getSession(true);
         String isbn = ja.get("isbn").getAsString();
-        
-        try{
-        EditBooksInLibraryTable et=new EditBooksInLibraryTable(); 
-        EditStudentsTable est=new EditStudentsTable();
-        
-        String id_book=et.getid(isbn);
-        String json=est.getid(username);
-        
-          Gson g = new Gson();
-          BookInLibrary b =g.fromJson(id_book, BookInLibrary.class);
-          Student s = g.fromJson(json, Student.class);
-          System.out.println(s.getUser_id());
-                JsonElement jsonElement = g.toJsonTree(s);
-                 jsonElement.getAsJsonObject().addProperty("user_id",s.getUser_id());
-                jsonElement.getAsJsonObject().addProperty("bookcopy_id",b.getBookcopy_id());
 
-                jsonElement.getAsJsonObject().addProperty("fromDate","1900-01-01");
-                jsonElement.getAsJsonObject().addProperty("toDate","1900-01-01");
-                jsonElement.getAsJsonObject().addProperty("status","requested");
-              
-                String finalresult=  g.toJson(jsonElement);
-                  System.out.println(finalresult);
-                 EditBorrowingTable ebt=new EditBorrowingTable();
-                 ebt.addBorrowingFromJSON(finalresult);
+        try {
+            EditBooksInLibraryTable et = new EditBooksInLibraryTable();
+            EditStudentsTable est = new EditStudentsTable();
 
-                System.out.println(finalresult);
-                
-                                
+            String id_book = et.getid(isbn);
+            String json = est.getid(username);
 
+            Gson g = new Gson();
+            BookInLibrary b = g.fromJson(id_book, BookInLibrary.class);
+            Student s = g.fromJson(json, Student.class);
+            System.out.println(s.getUser_id());
+            JsonElement jsonElement = g.toJsonTree(s);
+            jsonElement.getAsJsonObject().addProperty("user_id", s.getUser_id());
+            jsonElement.getAsJsonObject().addProperty("bookcopy_id", b.getBookcopy_id());
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+             String calendarString = dateFormat.format(cal.getTime());
+            jsonElement.getAsJsonObject().addProperty("fromDate", calendarString);
 
-        
-    
-        System.out.println(id_book);
-       
-        }catch (Exception e) {
+            cal.add(Calendar.MONTH, 1);
+                          calendarString = dateFormat.format(cal.getTime());
+
+            jsonElement.getAsJsonObject().addProperty("toDate", calendarString);
+
+//                Date date=new Date();
+            jsonElement.getAsJsonObject().addProperty("status", "requested");
+            String finalresult = g.toJson(jsonElement);
+            System.out.println(finalresult);
+            EditBorrowingTable ebt = new EditBorrowingTable();
+            ebt.addBorrowingFromJSON(finalresult);
+
+            System.out.println(finalresult);
+
+            System.out.println(id_book);
+
+        } catch (Exception e) {
 
         }
-        
-        
+
         processRequest(request, response);
     }
 
