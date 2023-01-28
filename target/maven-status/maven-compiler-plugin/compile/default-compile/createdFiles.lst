@@ -1,5 +1,6 @@
 database/tables/EditBooksInLibraryTable.class
 database/DB_Connection.class
+servelts/GetStatistics.class
 database/tables/EditStudentsTable.class
 database/tables/EditReviewsTable.class
 mainClasses/Review.class

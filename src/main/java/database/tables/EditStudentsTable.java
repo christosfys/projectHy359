@@ -320,4 +320,26 @@ public String getid(String username) throws SQLException, ClassNotFoundException
         }
     return null;
 }
+public String getcount() throws SQLException, ClassNotFoundException {
+    Connection con = DB_Connection.getConnection();
+    Statement stmt = con.createStatement();
+    ResultSet rs;
+    try{
+          rs = stmt.executeQuery("SELECT COUNT(student_type)  FROM students  WHERE student_type='BSc'");
+
+            rs.next();
+            String json=DB_Connection.getResultsToJSON(rs);
+            return json;
+    }
+
+    
+    catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    return null;
+}
+
+
+
 }

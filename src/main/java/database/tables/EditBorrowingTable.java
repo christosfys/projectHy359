@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Book;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 /**
  *
@@ -160,17 +162,56 @@ public class EditBorrowingTable {
         }
         return null;
         
-        
-        
-        
-        
-        
-        
-        
-        
+      
         
     }
     
+    
+public JsonArray threedaysexception (String id)   throws SQLException,ClassNotFoundException{
+        
+        
+        String query =("SELECT todate FROM borrowing WHERE user_id='"+id+"' AND status='borrowing'");
+       Connection con = DB_Connection.getConnection();
+//        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        JsonArray ja = new JsonArray();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                JsonObject json = DB_Connection.getResultsToJSONObject(rs);
+                Gson gson = new Gson();
+                ja.add(json);
+            }
+            return ja;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    
+}
+ public String sendwarnings(String id,String todate)      throws SQLException,ClassNotFoundException{
+     String query=("SELECT bok.title "
+             + "FROM booksinlibraries lib , borrowing bor,books bok"
+             + " WHERE bor.user_id='"+id+" ' "
+             + " AND bor.todate='"+todate+" ' "
+             + " AND bor.bookcopy_id=lib.bookcopy_id"
+             + " AND lib.isbn=bok.isbn");
+               
+             Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
 
-     
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery(query);
+            rs.next();
+            String json=DB_Connection.getResultsToJSON(rs);
+            return json;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+ }   
 }

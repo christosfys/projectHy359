@@ -8,7 +8,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
+ 
+    
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guest</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+         <script>
             function getbook(){
                  var xhr = new XMLHttpRequest();
     alert("TI ua ginei");
@@ -54,16 +63,38 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     };
     xhr.open('POST', 'GetBooks');
     xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.send();
-
-
-            }
-        </script>
-    </head>
-    <body>
-        
-        <button id="seeBooks" value="See books" onclick="getbook()">See book</button>
-        <table style="display: none" id="myTable">
+    xhr.send(); }
+    </script>
+  <style>
+    /* Add custom CSS here */
+    #see-books-btn {
+      background-color: #007bff;
+      color: #fff;
+    }
+    #see-books-btn:hover {
+      background-color: #0056b3;
+    }
+    #footer {
+      background-color: #f8f9fa;
+      padding: 1em;
+    }
+    #footer a {
+      color: #007bff;
+      text-decoration: none;
+      padding: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center">Welcome Guest!</h1>
+    <div class="text-center">
+      <button id="see-books-btn" class="btn btn-lg" onclick="getbook()">See Books</button>
+      <div  class="btn btn-lg">
+       <input type="button" onclick="location.href='login.html'"  class="btn btn-outline-info" value="Back"/>   
+      </div>
+       
+       <table style="display: none" id="myTable">
   <thead>
     <tr>
       <th>Title</th>
@@ -72,14 +103,31 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     </tr>
   </thead>
   <tbody id="tableBody">
+      
   </tbody>
 </table>
-            
-    </body>
-    
-    
-    
-    
-    
-    
+      
+      
+    </div>
+  </div>
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-md-3">
+          <a href="https://www.uoc.gr/">University of Crete</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="https://www.abebooks.com/">AbeBooks</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="https://www.helmepa.gr/">HELMEPA</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="https://www.tuc.gr/index.php?id=4992">Technical University of Crete</a>
+        </div>
+      </div>
+    </div>
+      
+  </footer>
+</body>
 </html>

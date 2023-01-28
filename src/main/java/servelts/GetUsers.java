@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import mainClasses.User;
-//import database.User;
 import database.tables.EditStudentsTable;
 import database.tables.EditLibrarianTable;
 import java.util.Arrays;
@@ -59,7 +58,6 @@ public class GetUsers extends HttpServlet {
             try{
                 EditStudentsTable edt=new EditStudentsTable();
              EditLibrarianTable elt=new EditLibrarianTable();
-             // Get the ArrayList1
              ArrayList<User> list1 = new ArrayList<User>();
    
             ArrayList<User>list2 = new ArrayList<User>();

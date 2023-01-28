@@ -2,8 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
-var lat=0;
-var lon=0;
+var lat = 0;
+var lon = 0;
 
 function loginPOST() {
 
@@ -52,6 +52,9 @@ function logout() {
 
 function getData() {
     var xhr = new XMLHttpRequest();
+    
+    sendalert();    
+  
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // alert("MPIKe o" +xhr.responseText);
@@ -71,6 +74,36 @@ function getData() {
 }
 
 
+function sendalert(){
+        var xhr = new XMLHttpRequest();
+        alert("Ekteleitai");
+      // sendalert();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // alert("MPIKe o" +xhr.responseText);
+            
+        } else if (xhr.status === 409) {
+           //   const responseData = JSON.parse(xhr.responseText);
+            
+          
+            alert("You must return your book with title" + responseData.title);
+        }
+    };
+    xhr.open('GET', 'Request_Data');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send();
+    
+
+
+
+
+
+}
+
+
+
+
+
 
 function requestData() {
     var xhr = new XMLHttpRequest();
@@ -78,16 +111,16 @@ function requestData() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             //const responseData = JSON.parse(xhr.responseText);  
             const responseData = JSON.parse(xhr.responseText);
-             lat=responseData.lat;
-             lon=responseData.lon;
+            lat = responseData.lat;
+            lon = responseData.lon;
 
             //   let result = responseData.includes(\"firstName\":\"John\");
             if (responseData.position === "student") {
                 delete responseData.position;
 
                 document.getElementById("ajaxContent").innerHTML = createTableFromJSON(responseData);
-                
-                alert("OI syntetagmenes einai "+lat+ " "+lon);
+
+                alert("OI syntetagmenes einai " + lat + " " + lon);
             } else {
                 window.location.replace('librarian.html');
                 delete responseData.position;
@@ -114,13 +147,13 @@ function createTableFromJSON(data) {
     for (const x in data) {
         var category = x;
         var value = data[x];
-        
-      
+
+
         if (value.endsWith('jpg') || value.endsWith("png")) {
             value = "<img height=300 src='" + value + "'/>";
         }
         html += "<tr><td>" + category + "</td><td>" + value + "</td></tr>";
-        
+
     }
     html += "</table>";
     return html;
@@ -130,14 +163,14 @@ function createTableFromJSON(data) {
 function showUpdate() {
     let element = document.getElementById("update");
     let hidden = element.getAttribute("hidden");
-    
-   
+
+
     if (hidden) {
         element.removeAttribute("hidden");
         alert("einai hidden");
     } else {
         element.setAttribute("hidden", "hidden");
-                alert("den einai hidden");
+        alert("den einai hidden");
 
     }
 }
@@ -327,8 +360,8 @@ function seeActiveBorrowings() {
                 var radioButton = document.createElement("input");
                 radioButton.type = "radio";
                 radioButton.id = "choice";
-                radioButton.name = "choice";
-                radioButton.value = jsonArray[i].title;
+                radioButton.name = "title";
+                radioButton.value = jsonArray[i].isbn;
                 tr.appendChild(radioButton);
                 tbody.appendChild(tr);
 
@@ -338,8 +371,47 @@ function seeActiveBorrowings() {
             document.body.appendChild(table);
             var button = document.createElement("button");
             button.innerHTML = "Write review";
+            button.onclick = function () {
+                var text = document.createElement("input");
+                text.name = "reviewText";
+                text.type = "text";
+
+                let select = document.createElement("select");
+                select.id = "reviewscore";
+
+                for (var i = 1; i <= 5; i++) {
+                    let option = document.createElement("option");
+                    option.value = i;
+                    option.text = i;
+                    select.appendChild(option);
+                }
+                document.body.appendChild(text);
+                document.body.appendChild(select);
+                var submit = document.createElement("button");
+                submit.value = "Insert Review";
+                submit.innerHTML = "Insert Review";
+                submit.onclick = function () {
+                    const data = {};
+                    data.reviewText = document.querySelector('input[name="reviewText').value;
+                    var selectedValue = select.options[select.selectedIndex].value;
+                    data.reviewscore = selectedValue;
+                    data.isbn = document.querySelector('input[name="title"]:checked').value;
+                    
+                   var check= checkStatus(data.isbn,jsonArray);
+                   alert(check);
+                    alert(selectedValue);
+                    const myJSON = JSON.stringify(data);
 
 
+                    alert(myJSON);
+                };
+                document.body.appendChild(submit);
+
+
+
+            };
+
+            document.body.appendChild(button);
 
 
 
@@ -403,4 +475,15 @@ function findbooks() {
 }
 
 
-
+function checkStatus(isbn,jsonArray) {
+    for (let i = 0; i < jsonArray.length; i++) {
+        if (jsonArray[i].isbn === isbn) {
+            if(jsonArray[i].status === "successEnd"){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    return false;
+}

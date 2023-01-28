@@ -21,13 +21,18 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
+import java.time.Period;
+import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import database.tables.EditLibrarianTable;
 import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 import mainClasses.Student;
 import mainClasses.BookInLibrary;
+import mainClasses.Borrowing;
 
 import mainClasses.Librarian;
 import com.google.gson.*;
@@ -76,6 +81,74 @@ public class Request_Data extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("loggedIn");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        JsonObject ja = new Gson().fromJson(request.getReader().readLine(), JsonObject.class);
+
+        try {
+            EditStudentsTable est = new EditStudentsTable();
+            String json = est.getid(username);
+      
+            JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+            json = jsonObject.get("user_id").getAsString();
+            EditBorrowingTable ebt = new EditBorrowingTable();
+            JsonArray jsonlibs = ebt.threedaysexception(json);
+            JsonArray finaljson= new JsonArray();
+            System.out.println(jsonlibs.size());
+           
+            for (int i = 0; i < jsonlibs.size(); i++) {    
+                
+                 JsonElement element = jsonlibs.get(i);
+            String todate = element.getAsJsonObject().get("todate").getAsString();
+                
+                
+                
+                
+             
+                System.out.println(todate);
+             
+		
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String calendarString = dateFormat.format(cal.getTime());
+           
+            
+            LocalDate dateBefore = LocalDate.parse(calendarString);
+	LocalDate dateAfter = LocalDate.parse(todate);
+		
+	//calculating number of days in between
+	long noOfDaysBetween = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+		
+	//displaying the number of days
+	System.out.println("EINAI OI APOSTASEI "+noOfDaysBetween);
+        
+            if(noOfDaysBetween<=3){
+                String results=ebt.sendwarnings(json,todate);
+                System.out.println("Einai to "+results);
+                   JsonObject finaljsonobject= new JsonParser().parse(results).getAsJsonObject();
+                   finaljson.add(finaljsonobject);
+                   
+                   
+            
+            
+            }
+       
+        
+        
+        
+        
+            }
+
+            System.out.println(jsonlibs.toString());
+
+            response.getWriter().write(jsonlibs.toString());
+            response.setStatus(200);
+
+        } catch (Exception e) {
+        }
+
         processRequest(request, response);
     }
 
@@ -114,11 +187,11 @@ public class Request_Data extends HttpServlet {
             jsonElement.getAsJsonObject().addProperty("bookcopy_id", b.getBookcopy_id());
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-             String calendarString = dateFormat.format(cal.getTime());
+            String calendarString = dateFormat.format(cal.getTime());
             jsonElement.getAsJsonObject().addProperty("fromDate", calendarString);
 
             cal.add(Calendar.MONTH, 1);
-                          calendarString = dateFormat.format(cal.getTime());
+            calendarString = dateFormat.format(cal.getTime());
 
             jsonElement.getAsJsonObject().addProperty("toDate", calendarString);
 

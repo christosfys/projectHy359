@@ -76,8 +76,6 @@ public class GetBooks extends HttpServlet {
             ArrayList <Book> book = elt.databaseToBooks();
             Gson gson = new Gson();
             JsonArray jsonlibs = gson.toJsonTree(book).getAsJsonArray();
-          
-
             response.getWriter().write(jsonlibs.toString());
             response.setStatus(200);
         } catch (Exception e) {

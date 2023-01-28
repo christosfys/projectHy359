@@ -120,3 +120,30 @@ function deleteUser() {
     xhr.setRequestHeader('Content-type', 'application/json');
     xhr.send(jsonData);
 }
+
+
+
+
+
+function getStatistics(){
+       var xhr = new XMLHttpRequest();
+    alert("TI ua ginei");
+    xhr.onload = function () {
+           if (xhr.readyState === 4 && xhr.status === 200) {
+           
+        
+    
+         } else if (xhr.status !== 200) {
+
+            alert("lathos");
+        }
+    };
+    
+     xhr.open('GET', 'GetStatistics');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send();
+
+    
+    
+    
+}
