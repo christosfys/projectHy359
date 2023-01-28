@@ -52,9 +52,9 @@ function logout() {
 
 function getData() {
     var xhr = new XMLHttpRequest();
-    
-    sendalert();    
-  
+
+    sendalert();
+
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // alert("MPIKe o" +xhr.responseText);
@@ -74,25 +74,25 @@ function getData() {
 }
 
 
-function sendalert(){
-        var xhr = new XMLHttpRequest();
-        alert("Ekteleitai");
-      // sendalert();
+function sendalert() {
+    var xhr = new XMLHttpRequest();
+    alert("Ekteleitai");
+    // sendalert();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // alert("MPIKe o" +xhr.responseText);
-            
+
         } else if (xhr.status === 409) {
-           //   const responseData = JSON.parse(xhr.responseText);
-            
-          
+            //   const responseData = JSON.parse(xhr.responseText);
+
+
             alert("You must return your book with title" + responseData.title);
         }
     };
     xhr.open('GET', 'Request_Data');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
-    
+
 
 
 
@@ -394,16 +394,28 @@ function seeActiveBorrowings() {
                     const data = {};
                     data.reviewText = document.querySelector('input[name="reviewText').value;
                     var selectedValue = select.options[select.selectedIndex].value;
-                    data.reviewscore = selectedValue;
+                    data.reviewScore = selectedValue;
                     data.isbn = document.querySelector('input[name="title"]:checked').value;
-                    
-                   var check= checkStatus(data.isbn,jsonArray);
-                   alert(check);
+
+                    var check = checkStatus(data.isbn, jsonArray);
+                    alert(check);
                     alert(selectedValue);
                     const myJSON = JSON.stringify(data);
+                    
+
+
+
+
+
+
+
+
+
 
 
                     alert(myJSON);
+                    
+                    postReview(myJSON);
                 };
                 document.body.appendChild(submit);
 
@@ -475,10 +487,10 @@ function findbooks() {
 }
 
 
-function checkStatus(isbn,jsonArray) {
+function checkStatus(isbn, jsonArray) {
     for (let i = 0; i < jsonArray.length; i++) {
         if (jsonArray[i].isbn === isbn) {
-            if(jsonArray[i].status === "successEnd"){
+            if (jsonArray[i].status === "successEnd") {
                 return true;
             } else {
                 return false;
@@ -486,4 +498,26 @@ function checkStatus(isbn,jsonArray) {
         }
     }
     return false;
+}
+
+
+function postReview(myJson){
+    alert("Tha steilo ");
+    var xhr = new XMLHttpRequest();
+                    xhr.onload = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            // alert("LOgin succesfull");
+
+
+                        } else if (xhr.status !== 200) {
+
+                         //   document.getElementById("error").innerHTML = "Wrong Credetential";
+                        }
+                    };
+
+                    xhr.open('Post', 'WriteReview');
+                    xhr.setRequestHeader("Content-type", "application/json");
+                    xhr.send(myJson);
+
+
 }

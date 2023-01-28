@@ -75,6 +75,14 @@
         <servlet-name>GetStatistics</servlet-name>
         <servlet-class>servelts.GetStatistics</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WriteReviw</servlet-name>
+        <servlet-class>servelts.WriteReviw</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>WriteReview</servlet-name>
+        <servlet-class>servelts.WriteReview</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -146,6 +154,14 @@
     <servlet-mapping>
         <servlet-name>GetStatistics</servlet-name>
         <url-pattern>/GetStatistics</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WriteReviw</servlet-name>
+        <url-pattern>/WriteReviw</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WriteReview</servlet-name>
+        <url-pattern>/WriteReview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

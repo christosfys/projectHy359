@@ -28,6 +28,7 @@ servelts/UpdateData.class
 servelts/Logout.class
 servelts/GetData.class
 servelts/Request_Data.class
+servelts/WriteReview.class
 servelts/DeleteUser.class
 servelts/Login.class
 servelts/GetBooks.class
