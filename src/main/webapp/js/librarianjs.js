@@ -17,7 +17,7 @@ function showform(){
     
 }
 function changeavalbilty(){
-    alert("patietai to gamidi");
+   // alert("patietai to gamidi");
     
      let myForm = document.getElementById('avaliabilty');
      
@@ -53,10 +53,44 @@ function getActiveBorrowings(){
         if (xhr.readyState === 4 && xhr.status === 200) {
             
             
+                   const jsonArray = JSON.parse(xhr.responseText);
+            var table = document.createElement("table");
+            table.setAttribute("id", "json-table");
+            var thead = document.createElement("thead");
+            var tr = document.createElement("tr");
+
+            for (var key in jsonArray[0]) {
+                var th = document.createElement("th");
+                th.innerHTML = key;
+                tr.appendChild(th);
+            }
+
+            thead.appendChild(tr);
+            table.appendChild(thead);
+
+// Create table body
+            var tbody = document.createElement("tbody");
+
+            for (var i = 0; i < jsonArray.length; i++) {
+                var tr = document.createElement("tr");
+
+                for (var key in jsonArray[i]) {
+                    var td = document.createElement("td");
+                    td.innerHTML = jsonArray[i][key];
+                    tr.appendChild(td);
+                }
+
+                tbody.appendChild(tr);
+            }
+
+            table.appendChild(tbody);
+
+// Append table to the body
+            document.body.appendChild(table);
+
             
             
-            
-        console.log(xhr.responseText);
+       
         
         
           

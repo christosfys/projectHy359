@@ -80,10 +80,10 @@ public class SeeActiveBorrowing extends HttpServlet {
            String json=l.getid(username);
              Gson g = new Gson();
              Librarian lt = g.fromJson(json, Librarian.class);          
-           //  JsonArray bor = q.allLibrs(lt.getLibrary_id());
+            JsonArray bor = q.allLibrs(lt.getLibrary_id());
                   
             
-             JsonArray bor = q.allLibrs(lt.getLibrary_id());
+          //   JsonArray bor = q.allLibrs(lt.getLibrary_id());
             JsonArray jsonlibs = g.toJsonTree(bor).getAsJsonArray();
             
             

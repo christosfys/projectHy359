@@ -190,11 +190,12 @@ public class GeneralQueries {
     public JsonArray allLibrs(int user_id) throws SQLException, ClassNotFoundException {
         String query = ("SELECT books.isbn, books.title ,borrowing.status, students.firstname ,students.lastname, students.telephone ,students.university "
                 + "FROM librarians,books,borrowing,students,booksinlibraries"
-                + " WHERE booksinlibraries.isbn=books.isbn"
+                + " WHERE  librarians.library_id='" + user_id + "'"
+                + "AND booksinlibraries.isbn=books.isbn"
                 + " AND booksinlibraries.bookcopy_id=borrowing.bookcopy_id "
                 + "AND borrowing.user_id=students.user_id "
-                + "AND librarians.library_id='" + user_id + "'"
-                + "AND (borrowing.status='borrowing' OR borrowing.status='successEnd')");
+               
+                + "AND (borrowing.status='borrowing' OR borrowing.status='successEnd' OR borrowing.status='returned')");
         Connection con = DB_Connection.getConnection();
 //        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -204,6 +205,7 @@ public class GeneralQueries {
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 JsonObject json = DB_Connection.getResultsToJSONObject(rs);
+                System.out.println("ola kala");
                 Gson gson = new Gson();
                 ja.add(json);
             }
@@ -223,12 +225,12 @@ public class GeneralQueries {
                 + "AND students.user_id=borrowing.user_id "
                 + "AND borrowing.bookcopy_id='" + copy_id + "'"
                 + "AND borrowing.status='requested'");*/
-       String query = ("SELECT borrowing.borrowing_id,students.firstname, students.lastname, books.title\n" +
+       String query = ("SELECT borrowing.borrowing_id,students.firstname, students.lastname, books.title ,borrowing.status\n" +
 "FROM students\n" +
 "JOIN borrowing ON students.user_id = borrowing.user_id\n" +
 "JOIN booksinlibraries ON borrowing.bookcopy_id = booksinlibraries.bookcopy_id\n" +
 "JOIN books ON booksinlibraries.isbn = books.isbn\n" +
-"WHERE borrowing.bookcopy_id = '"+copy_id+"' AND borrowing.status='requested'");
+"WHERE borrowing.bookcopy_id = '"+copy_id+"' AND (borrowing.status='requested' OR borrowing.status='returned' OR borrowing.status='borrowing')");
        
         Connection con = DB_Connection.getConnection();
 //        Connection con = DB_Connection.getConnection();

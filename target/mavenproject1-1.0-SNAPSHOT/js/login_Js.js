@@ -80,13 +80,24 @@ function sendalert() {
     // sendalert();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            
+                    //const jsonArray = JSON.parse(xhr.responseText);
+                             alert(xhr.responseText);
+                             if(xhr.responseText==="[]"){
+                                 
+                             } else{
+                                                              const jsonArray = JSON.parse(xhr.responseText);
+
+                                 alert("You must return your book with title" + jsonArray[0].title);
+                            // alert("LOgin succesfull");
+                        }
             // alert("MPIKe o" +xhr.responseText);
 
         } else if (xhr.status === 409) {
             //   const responseData = JSON.parse(xhr.responseText);
 
 
-            alert("You must return your book with title" + responseData.title);
+            //alert("You must return your book with title" + responseData.title);
         }
     };
     xhr.open('GET', 'Request_Data');
@@ -222,7 +233,6 @@ function getBooks() {
             thead.appendChild(tr);
             table.appendChild(thead);
 
-// Create table body
             var tbody = document.createElement("tbody");
 
             for (var i = 0; i < jsonArray.length; i++) {
@@ -506,7 +516,8 @@ function postReview(myJson){
     var xhr = new XMLHttpRequest();
                     xhr.onload = function () {
                         if (xhr.readyState === 4 && xhr.status === 200) {
-                            // alert("LOgin succesfull");
+                            
+                            
 
 
                         } else if (xhr.status !== 200) {
