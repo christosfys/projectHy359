@@ -117,7 +117,7 @@ public class CreateBook extends HttpServlet {
            String exist=ebt.searchbook(book.getIsbn());
            if(exist!=null){
            System.out.println("yparxei diploptipo");
-           response.setstatus
+            response.setStatus(409);
       
            }else{
            
