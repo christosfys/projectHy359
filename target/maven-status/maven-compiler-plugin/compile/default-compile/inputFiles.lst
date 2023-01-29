@@ -11,6 +11,7 @@
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/AdminMessage.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/database/tables/EditLibrarianTable.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/database/DB_Connection.java
+/Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/ReturnTheBook.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/DeleteUser.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/database/tables/EditStudentsTable.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/JSON_Converter.java
@@ -35,4 +36,5 @@
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Borrowing.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/NewServlet.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/FindBooks.java
+/Users/christosfysarakis/Desktop/projectHy359/src/main/java/servelts/SendBook.java
 /Users/christosfysarakis/Desktop/projectHy359/src/main/java/mainClasses/Book.java

@@ -218,13 +218,7 @@ public class GeneralQueries {
     }
 
     public String getRequests(String copy_id) throws SQLException, ClassNotFoundException {
-       /* String query = ("SELECT books.title,students.firstname, students.lastname,students.telephone "
-                + "FROM books,borrowing,booksinlibraries,students"
-                + "WHERE booksinlibraries.bookcopy_id=borrowing.bookcopy_id "
-                + "AND booksinlibraries.isbn=books.isbn "
-                + "AND students.user_id=borrowing.user_id "
-                + "AND borrowing.bookcopy_id='" + copy_id + "'"
-                + "AND borrowing.status='requested'");*/
+    
        String query = ("SELECT borrowing.borrowing_id,students.firstname, students.lastname, books.title ,borrowing.status\n" +
 "FROM students\n" +
 "JOIN borrowing ON students.user_id = borrowing.user_id\n" +
@@ -233,9 +227,7 @@ public class GeneralQueries {
 "WHERE borrowing.bookcopy_id = '"+copy_id+"' AND (borrowing.status='requested' OR borrowing.status='returned' OR borrowing.status='borrowing')");
        
         Connection con = DB_Connection.getConnection();
-//        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-       // JsonArray ja = new JsonArray();
         ResultSet rs;
         try {
             rs = stmt.executeQuery(query);

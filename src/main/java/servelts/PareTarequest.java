@@ -90,7 +90,9 @@ public class PareTarequest extends HttpServlet {
                     finalArray.add(jsonObject);
                 }
             }
+            System.out.println("ti skata ginetai re "+finalArray.toString());
             response.getWriter().write(finalArray.toString());
+                    
             response.setStatus(200);
 
         } catch (Exception e) {

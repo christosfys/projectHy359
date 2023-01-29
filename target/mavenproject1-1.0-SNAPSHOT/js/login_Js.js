@@ -80,17 +80,17 @@ function sendalert() {
     // sendalert();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            
-                    //const jsonArray = JSON.parse(xhr.responseText);
-                             alert(xhr.responseText);
-                             if(xhr.responseText==="[]"){
-                                 
-                             } else{
-                                                              const jsonArray = JSON.parse(xhr.responseText);
 
-                                 alert("You must return your book with title" + jsonArray[0].title);
-                            // alert("LOgin succesfull");
-                        }
+            //const jsonArray = JSON.parse(xhr.responseText);
+            alert(xhr.responseText);
+            if (xhr.responseText === "[]") {
+
+            } else {
+                const jsonArray = JSON.parse(xhr.responseText);
+
+                alert("You must return your book with title" + jsonArray[0].title);
+                // alert("LOgin succesfull");
+            }
             // alert("MPIKe o" +xhr.responseText);
 
         } else if (xhr.status === 409) {
@@ -332,14 +332,13 @@ function requestbook() {
     xhr.send(jsonData);
 }
 
+
+
 function seeActiveBorrowings() {
     var xhr = new XMLHttpRequest();
-    //alert("TI ua ginei");
+    alert("TI ua ginei");
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-
-            alert(xhr.responseText);
-
             const jsonArray = JSON.parse(xhr.responseText);
             var table = document.createElement("table");
             table.setAttribute("id", "json-table");
@@ -351,19 +350,15 @@ function seeActiveBorrowings() {
                 th.innerHTML = key;
                 tr.appendChild(th);
             }
-
             thead.appendChild(tr);
             table.appendChild(thead);
-
             var tbody = document.createElement("tbody");
-
             for (var i = 0; i < jsonArray.length; i++) {
                 var tr = document.createElement("tr");
 
                 for (var key in jsonArray[i]) {
                     var td = document.createElement("td");
                     td.innerHTML = jsonArray[i][key];
-
                     tr.appendChild(td);
                 }
 
@@ -374,11 +369,27 @@ function seeActiveBorrowings() {
                 radioButton.value = jsonArray[i].isbn;
                 tr.appendChild(radioButton);
                 tbody.appendChild(tr);
-
             }
-
             table.appendChild(tbody);
             document.body.appendChild(table);
+        
+                var backbutton = document.createElement("button");
+                backbutton.value = "returnbook";
+                backbutton.innerHTML = "return Book";
+                
+                   backbutton.onclick = function () {
+                        const data = {};
+                    data.isbn = document.querySelector('input[name="title"]:checked').value;
+                     var check = checkStatus(data.isbn, jsonArray,"borrowing");
+                       if(check){
+                           alert(check);
+                           returnbook(data.isbn);
+                       }else{
+                           alert("You dont have this book");
+                       }
+                   };
+                
+                  document.body.appendChild(backbutton);
             var button = document.createElement("button");
             button.innerHTML = "Write review";
             button.onclick = function () {
@@ -406,34 +417,27 @@ function seeActiveBorrowings() {
                     var selectedValue = select.options[select.selectedIndex].value;
                     data.reviewScore = selectedValue;
                     data.isbn = document.querySelector('input[name="title"]:checked').value;
+                    var check = checkStatus(data.isbn, jsonArray,"successEnd");
+                    if (check) {
+                        alert(selectedValue);
+                        const myJSON = JSON.stringify(data);
 
-                    var check = checkStatus(data.isbn, jsonArray);
-                    alert(check);
-                    alert(selectedValue);
-                    const myJSON = JSON.stringify(data);
-                    
+                        postReview(myJSON);
+                    } else {
+                        alert("You can't write a review for this book beacuse you don't have reuturned");
 
-
-
-
-
-
-
-
-
-
-
-                    alert(myJSON);
-                    
-                    postReview(myJSON);
+                    }
                 };
-                document.body.appendChild(submit);
+               
 
+            };  
+          
+          
+                     
 
-
-            };
-
+            
             document.body.appendChild(button);
+
 
 
 
@@ -497,10 +501,10 @@ function findbooks() {
 }
 
 
-function checkStatus(isbn, jsonArray) {
+function checkStatus(isbn, jsonArray,idiotita) {
     for (let i = 0; i < jsonArray.length; i++) {
         if (jsonArray[i].isbn === isbn) {
-            if (jsonArray[i].status === "successEnd") {
+            if (jsonArray[i].status === idiotita) {
                 return true;
             } else {
                 return false;
@@ -511,24 +515,48 @@ function checkStatus(isbn, jsonArray) {
 }
 
 
-function postReview(myJson){
+function postReview(myJson) {
     alert("Tha steilo ");
     var xhr = new XMLHttpRequest();
-                    xhr.onload = function () {
-                        if (xhr.readyState === 4 && xhr.status === 200) {
-                            
-                            
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
 
 
-                        } else if (xhr.status !== 200) {
-
-                         //   document.getElementById("error").innerHTML = "Wrong Credetential";
-                        }
-                    };
-
-                    xhr.open('Post', 'WriteReview');
-                    xhr.setRequestHeader("Content-type", "application/json");
-                    xhr.send(myJson);
 
 
+        } else if (xhr.status !== 200) {
+
+            //   document.getElementById("error").innerHTML = "Wrong Credetential";
+        }
+    };
+
+    xhr.open('Post', 'WriteReview');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(myJson);
+}
+
+function returnbook(isbn){
+        alert("Tha steilo "+ isbn);
+        
+        const data={};
+        data.isbn=isbn;
+          var jsonData = JSON.stringify(data);
+     
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+
+        alert("epistrafike");
+
+
+        } else if (xhr.status !== 200) {
+
+            //   document.getElementById("error").innerHTML = "Wrong Credetential";
+        }
+    };
+
+    xhr.open('Post', 'SendBook');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonData);
+    
 }

@@ -83,6 +83,14 @@
         <servlet-name>WriteReview</servlet-name>
         <servlet-class>servelts.WriteReview</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendBook</servlet-name>
+        <servlet-class>servelts.SendBook</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReturnTheBook</servlet-name>
+        <servlet-class>servelts.ReturnTheBook</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/MyServlet</url-pattern>
@@ -162,6 +170,14 @@
     <servlet-mapping>
         <servlet-name>WriteReview</servlet-name>
         <url-pattern>/WriteReview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendBook</servlet-name>
+        <url-pattern>/SendBook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReturnTheBook</servlet-name>
+        <url-pattern>/ReturnTheBook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

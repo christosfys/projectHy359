@@ -80,6 +80,26 @@ public class EditBorrowingTable {
         stmt.close();
         con.close();
     }
+    
+    public void returnbook(String bookcopy_id,String user) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String updateQuery = "UPDATE borrowing SET status='returned' WHERE bookcopy_id='"+bookcopy_id+"' AND user_id='"+user+"'";
+        System.out.println(bookcopy_id+" "+user);
+        stmt.executeUpdate(updateQuery);
+        stmt.close();
+        con.close();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public void deleteBorrowing(int randevouzID) throws SQLException, ClassNotFoundException{
         Connection con = DB_Connection.getConnection();

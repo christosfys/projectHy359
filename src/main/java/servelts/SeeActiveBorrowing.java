@@ -86,7 +86,7 @@ public class SeeActiveBorrowing extends HttpServlet {
           //   JsonArray bor = q.allLibrs(lt.getLibrary_id());
             JsonArray jsonlibs = g.toJsonTree(bor).getAsJsonArray();
             
-            
+            //   System.out.println(jsonlibs.to())
             
          
 

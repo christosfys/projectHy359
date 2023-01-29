@@ -146,6 +146,33 @@ public class EditBooksInLibraryTable {
         }
         return null;
     }
+      
+      
+        
+   public JsonArray selectealllibswithbook(String isbn) throws SQLException, ClassNotFoundException {
+       String query=("SELECT bookcopy_id FROM booksinlibraries WHERE isbn='"+isbn+"'");
+  Connection con = DB_Connection.getConnection();
+//        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        JsonArray ja = new JsonArray();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                JsonObject json = DB_Connection.getResultsToJSONObject(rs);
+                System.out.println("ola kala");
+                Gson gson = new Gson();
+                ja.add(json);
+            }
+            return ja;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+      
+      
 }
 
 
