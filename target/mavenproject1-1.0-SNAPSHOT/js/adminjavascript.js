@@ -17,10 +17,8 @@ function adminlogin() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // alert("LOgin succesfull");
-            //   const responseData = JSON.parse(xhr.responseText);
-            //document.getElementById("error").innerHTML = "Succeeded Log in";
-
+           
+           
             window.location.replace('adminwelcomepage.html');
 
         } else if (xhr.status !== 200) {
@@ -43,7 +41,7 @@ function getUsers() {
             //  alert(count);
             var table = document.createElement("table");
 
-// Create table headers
+
 var header = table.createTHead();
 var row = header.insertRow(0);
 var cell1 = row.insertCell(0);
@@ -53,7 +51,7 @@ cell1.innerHTML = "username";
 cell2.innerHTML = "firstname";
 cell3.innerHTML = "lastname";
 
-// Add data to table
+
 var body = table.createTBody();
 for (var i = 0; i < data.length; i++) {
   var row = body.insertRow(i);
@@ -65,7 +63,7 @@ for (var i = 0; i < data.length; i++) {
   cell3.innerHTML = data[i].lastname;
 }
 
-// Add table to the HTML document
+
 document.body.appendChild(table);
 
             let element = document.getElementById("deleteuser");
