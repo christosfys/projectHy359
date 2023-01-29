@@ -18,8 +18,7 @@ function loginPOST() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            // alert("LOgin succesfull");
-            //   const responseData = JSON.parse(xhr.responseText);
+           
             document.getElementById("error").innerHTML = "Succeeded Log in";
             window.location.replace('welcome.html');
 
@@ -53,7 +52,6 @@ function logout() {
 function getData() {
     var xhr = new XMLHttpRequest();
 
-    sendalert();
 
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -87,9 +85,11 @@ function sendalert() {
 
             } else {
                 const jsonArray = JSON.parse(xhr.responseText);
-
-                alert("You must return your book with title" + jsonArray[0].title);
-                // alert("LOgin succesfull");
+                 var count = Object.keys(jsonArray).length;
+                for (var i = 0; i < count; i++) {
+                alert("You must return your book with title" + jsonArray[i].title);
+             
+                }   // alert("LOgin succesfull");
             }
             // alert("MPIKe o" +xhr.responseText);
 
@@ -97,7 +97,7 @@ function sendalert() {
             //   const responseData = JSON.parse(xhr.responseText);
 
 
-            //alert("You must return your book with title" + responseData.title);
+           // alert("You must return your book with title" + responseData.title);
         }
     };
     xhr.open('GET', 'Request_Data');
@@ -131,7 +131,7 @@ function requestData() {
 
                 document.getElementById("ajaxContent").innerHTML = createTableFromJSON(responseData);
 
-                alert("OI syntetagmenes einai " + lat + " " + lon);
+               // alert("OI syntetagmenes einai " + lat + " " + lon);
             } else {
                 window.location.replace('librarian.html');
                 delete responseData.position;
@@ -339,6 +339,8 @@ function seeActiveBorrowings() {
     alert("TI ua ginei");
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+                sendalert();
+
             const jsonArray = JSON.parse(xhr.responseText);
             var table = document.createElement("table");
             table.setAttribute("id", "json-table");

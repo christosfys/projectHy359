@@ -14,10 +14,10 @@ import mainClasses.Student;
 import mainClasses.Librarian;
 import mainClasses.User;
 import database.tables.EditStudentsTable;
-import database.tables.EditLibrarianTable;
+import database.tables.EditBooksTable;
 import java.sql.SQLException;
 import mainClasses.JSON_Converter;
-import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
@@ -61,8 +61,17 @@ public class GetStatistics extends HttpServlet {
                 
                 
                 EditStudentsTable edt=new EditStudentsTable();
-                String user_result=edt.getcount();
-                System.out.println(user_result);
+                EditBooksTable ebt=new EditBooksTable();
+                String bsc_results=edt.getcount("BSc");
+                System.out.println(bsc_results);
+                String  phd_results=edt.getcount("PhD");
+                                System.out.println(phd_results);
+
+                String mhd_results=edt.getcount("Mhd");
+                                                System.out.println(mhd_results);
+
+               // JsonArray ss=ebt.getbooksbygenre();
+//                                                System.out.println(ss.toString());
             }catch (Exception e){
             }
         

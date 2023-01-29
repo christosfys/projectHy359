@@ -99,7 +99,7 @@ public class Accept_borrowing extends HttpServlet {
                  
                  
                  
-                ebt.updateBorrowing(number,"borrowing");
+              ebt.updateBorrowing(number,"borrowing");
               String coppy_of_book=ebt.getbook(number);
               System.out.println(coppy_of_book);
               JsonObject jo= new JsonParser().parse(coppy_of_book).getAsJsonObject();
@@ -109,7 +109,7 @@ public class Accept_borrowing extends HttpServlet {
               ebtl.updateBookInLibrary(coppy_of_book,"false");
               
                       
-                      
+                      response.setStatus(200);
                                    
               
               

@@ -191,6 +191,7 @@ public class GeneralQueries {
         String query = ("SELECT books.isbn, books.title ,borrowing.status, students.firstname ,students.lastname, students.telephone ,students.university "
                 + "FROM librarians,books,borrowing,students,booksinlibraries"
                 + " WHERE  librarians.library_id='" + user_id + "'"
+                + "AND librarians.library_id=booksinlibraries.library_id "
                 + "AND booksinlibraries.isbn=books.isbn"
                 + " AND booksinlibraries.bookcopy_id=borrowing.bookcopy_id "
                 + "AND borrowing.user_id=students.user_id "

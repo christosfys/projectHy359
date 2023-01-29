@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Librarian;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 
 /**
  *
@@ -70,7 +73,7 @@ public class EditBooksTable {
         ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM books WHERE genre= '" + genre + "'");
-           
+
             while (rs.next()) {
                 String json = DB_Connection.getResultsToJSON(rs);
                 Gson gson = new Gson();
@@ -157,43 +160,72 @@ public class EditBooksTable {
             Logger.getLogger(EditBooksTable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public String databaseToStringBooks()
-        throws SQLException, ClassNotFoundException {
-     Connection con = DB_Connection.getConnection();
+            throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM books");
             rs.next();
-            String json=DB_Connection.getResultsToJSON(rs);
+            String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
         return null;
-        
+
     }
 
- public String searchbook(String isbn)
-        throws SQLException, ClassNotFoundException {
-     Connection con = DB_Connection.getConnection();
+    public String searchbook(String isbn)
+            throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
 
         ResultSet rs;
         try {
             rs = stmt.executeQuery("SELECT * FROM books WHERE isbn='" + isbn + "'");
             rs.next();
-            String json=DB_Connection.getResultsToJSON(rs);
+            String json = DB_Connection.getResultsToJSON(rs);
             return json;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
         return null;
-        
+
     }
 
+    public JsonArray getbooksbygenre() throws SQLException, ClassNotFoundException {
+
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String query = ("SELECT genre, COUNT(*) as count"
+                + "FROM books "
+                + "GROUP BY genre");
+
+        JsonArray ja = new JsonArray();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                JsonObject json = DB_Connection.getResultsToJSONObject(rs);
+                Gson gson = new Gson();
+                ja.add(json);
+            }
+            return ja;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+    // return null;
 
 }
+
+

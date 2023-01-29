@@ -5,7 +5,7 @@
 
 
 function showform() {
-    alert("info");
+  //  alert("info");
     let element = document.getElementById("info");
     let hidden = element.getAttribute("hidden");
 
@@ -26,7 +26,7 @@ function changeavalbilty() {
     const data = {};
     formData.forEach((value, key) => (data[key] = value));
     var jsonData = JSON.stringify(data);
-    alert(jsonData);
+   // alert(jsonData);
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -46,7 +46,7 @@ function changeavalbilty() {
 
 
 function getActiveBorrowings() {
-    alert("patietai to gamidi");
+  //  alert("patietai to gamidi");
 
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
@@ -87,38 +87,10 @@ function getActiveBorrowings() {
             table.appendChild(tbody);
 
             document.body.appendChild(table);
-            var jsPDF = require('jspdf');
-
-// Create a new PDF document
-            var doc = new jsPDF();
-
-// Get the JSON array
-//var jsonArray = [{'name': 'John', 'age': 30}, {'name': 'Jane', 'age': 25}];
-
-// Create a table to hold the data from the JSON array
-            var table = "<table><thead><tr><th></th><th></th></tr></thead><tbody>";
-
-// Loop through the JSON array and add each row to the table
-            jsonArray.forEach(function (item) {
-                table += "<tr><td>" + item.name + "</td><td>" + item.lastname + "</td></tr>";
-            });
-
-            table += "</tbody></table>";
-
-// Add the table to the PDF
-            doc.fromHTML(table, 20, 20);
-
-// Save the PDF
-            doc.save('response.pdf');
-
-
-
-
-
 
 
         } else if (xhr.status !== 200) {
-
+            alert("failed");
 
         }
     };
@@ -236,13 +208,9 @@ function pareTarequests() {
             returnbutton.onclick = function () {
                 var form2 = {};
                 form2.borrowing_id = document.querySelector('input[name="borrowing_id"]:checked').value;
-                var check = checkStatus(form2.borrowing_id, jsonArray, "returned");
-                if (check) {
+                //var check = checkStatus(form2.borrowing_id, jsonArray, "returned");
+              
                     returntoLibrary(form2.borrowing_id);
-
-                } else {
-                    alert("The books has'nt returned");
-                }
 
             };
             document.body.appendChild(returnbutton);
@@ -294,6 +262,7 @@ function accept_request() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+            alert("To vilio dothike");
 
 
 

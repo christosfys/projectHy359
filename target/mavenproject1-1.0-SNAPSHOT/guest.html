@@ -20,7 +20,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
          <script>
             function getbook(){
                  var xhr = new XMLHttpRequest();
-    alert("TI ua ginei");
+   // alert("TI ua ginei");
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById("myTable").style.display = "block";
@@ -29,31 +29,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
             const jsonResponse = JSON.parse(xhr.responseText);
              var tableBody = document.getElementById("tableBody");
 
-  // Iterate through the JSON response
+ 
   for (var i = 0; i < jsonResponse.length; i++) {
-    // Create a new row element
+   
     var row = document.createElement("tr");
 
-    // Create a new cell for the title
+   
     var titleCell = document.createElement("td");
     titleCell.innerHTML = jsonResponse[i].title ;
 
-    // Create a new cell for the genre
-    var genreCell = document.createElement("td");
+var genreCell = document.createElement("td");
     genreCell.innerHTML = jsonResponse[i].genre;
 
-    // Create a new cell for the checkbox
-    var checkboxCell = document.createElement("td");
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkboxCell.appendChild(checkbox);
-
-    // Add the cells to the row
+   
+  
     row.appendChild(titleCell);
     row.appendChild(genreCell);
-    row.appendChild(checkboxCell);
-
-    // Add the row to the table body
+   
+   
     tableBody.appendChild(row);
   }
 
@@ -66,7 +59,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     xhr.send(); }
     </script>
   <style>
-    /* Add custom CSS here */
+   
     #see-books-btn {
       background-color: #007bff;
       color: #fff;
@@ -99,7 +92,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this
     <tr>
       <th>Title</th>
       <th>Genre</th>
-      <th>Select</th>
+     
     </tr>
   </thead>
   <tbody id="tableBody">

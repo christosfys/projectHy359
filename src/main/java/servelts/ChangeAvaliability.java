@@ -76,6 +76,7 @@ public class ChangeAvaliability extends HttpServlet {
              String isbn = ja.get("isbn").getAsString();
              EditBooksTable ebt=new EditBooksTable();
              String exist=ebt.searchbook(isbn);
+             if(exist!=null){
              EditLibrarianTable edit = new EditLibrarianTable();
              String library_id=edit.getid(username);
               Gson g = new Gson();
@@ -88,7 +89,11 @@ public class ChangeAvaliability extends HttpServlet {
               System.out.println(finalresult);
                 EditBooksInLibraryTable eblt=new EditBooksInLibraryTable();
              eblt.addBookInLibraryFromJSON(finalresult);
-        
+             response.setStatus(200);
+             }else{ response.setStatus(403);
+            JsonObject jo = new JsonObject();
+            jo.addProperty("error", "Yparxei diathesimo");
+             }
         
         
         }catch (Exception e) {

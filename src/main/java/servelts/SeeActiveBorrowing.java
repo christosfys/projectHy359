@@ -97,9 +97,6 @@ public class SeeActiveBorrowing extends HttpServlet {
         }
         
         
-        
-        
-        
         processRequest(request, response);
     }
 

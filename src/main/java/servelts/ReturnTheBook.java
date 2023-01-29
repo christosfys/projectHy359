@@ -36,7 +36,6 @@ import mainClasses.Borrowing;
 
 import mainClasses.Librarian;
 import com.google.gson.*;
-import com.itextpdf.text.pdf.PdfWriter;
 /**
  *
  * @author christosfysarakis
@@ -92,7 +91,7 @@ public class ReturnTheBook extends HttpServlet {
         try{
             EditBorrowingTable ebt=new EditBorrowingTable();
             int parse=Integer.parseInt(borrowing_id);
-            ebt.updateBorrowing(parse,"succesEnd");
+            ebt.updateBorrowing(parse,"successEnd");
             String bookcopy=ebt.getbook(parse);
             EditBooksInLibraryTable ebit=new EditBooksInLibraryTable();
              JsonObject jsonObject = new JsonParser().parse(bookcopy).getAsJsonObject();
