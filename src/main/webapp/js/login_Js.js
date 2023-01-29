@@ -80,7 +80,7 @@ function sendalert() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
             //const jsonArray = JSON.parse(xhr.responseText);
-            alert(xhr.responseText);
+           // alert(xhr.responseText);
             if (xhr.responseText === "[]") {
 
             } else {
