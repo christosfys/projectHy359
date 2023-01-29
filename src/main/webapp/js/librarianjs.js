@@ -127,11 +127,12 @@ function createbook() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-
+            alert("To vivlio kataxorithike");
 
 
 
         } else if (xhr.status !== 200) {
+            alert ("yparxei to vilio ");
 
 
         }
